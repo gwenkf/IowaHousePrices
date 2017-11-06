@@ -75,9 +75,9 @@ Unique Row ID,Orig Order,Original Variable,Original Var. Meaning,New Variables B
 52,15,obj 14 Condition1/2,Proximity to main road or railroad,Dummies starting with 'prox_',prox_rr,>3.0%,.,-0.02,x,neighborhood,74,dummy
 53,15,obj 14 Condition1/2,Proximity to main road or railroad,Dummies starting with 'prox_',prox_positive,>1.8%,.,0.07,x,neighborhood,75,dummy
 64,19,int 19 OverallCond,Overall condition rating,.,OverallCond,"Correlated, but category 5 is above avg. 5 & 9 have more dispersion",.,-0.08,x,quality/condition,76,numeric
-84,28.5,obj 28 ExterQual,.,New Numeric: average_quality,average_quality,"average of heating_quality, exterior_quality, kitchen_quality, OverallQual, and bsmt_height",.,.,x,quality/condition,77,numeric
+84,28.5,obj 28 ExterQual,.,New Numeric: average_quality,quality_residual,"average_quality = average of heating_quality, exterior_quality, kitchen_quality, OverallQual, and bsmt_height, but we use quality_residual - based on its regression on 4 vars",.,.,x,quality/condition,77,numeric
 85,29,obj 29 ExterCond,Present condition of the material on the exterior,NUMERIC: exterior_condition,exterior_condition,"Correlated with exterior quality? 
- Multiply exterior_quality by exterior_condition?",.,0.02,x,quality/condition,78,numeric
+Multiply exterior_quality by exterior_condition?",.,0.02,x,quality/condition,78,numeric
 91,32,obj 32 BsmtCond,General condition of the basement,NUMERIC: bsmt_condition,bsmt_condition,. NA = no basement,Must contribute to price,0.21,x,quality/condition,79,numeric
 93,34,obj 34 BsmtFinType1,Quality of basement finished area,NUMERIC: bsmt_finished1,bsmt_finished1,.,.,0.36,x,quality/condition,80,numeric
 95,36,obj 36 BsmtFinType2,Quality of second finished area (if present),NUMERIC: bsmt_finished2,bsmt_finished2,.,.,0.04,x,quality/condition,81,numeric
@@ -103,4 +103,59 @@ Unique Row ID,Orig Order,Original Variable,Original Var. Meaning,New Variables B
 157,80,obj 80 SaleCondition,Condition of sale,Dummies starting with 'sale_',sale_Family,1.40%,.,-0.05,x,sales characteristics,101,dummy
 159,80,obj 80 SaleCondition,Condition of sale,Dummies starting with 'sale_',sale_Partial,8.20%,.,0.35,x,sales characteristics,102,dummy
 66,21,int 21 YearRemodAdd,Remodel date,IGNORE - use dummy 'remodeled' because it's correlated with year built,remodeled,.,MIght contribute to price,-0.02,x,year,103,dummy
-65,20,int 20 YearBuilt,Original construction date,.,age,Use age (YearBuilt - YrSold) instead,High importance,0.52,x,year,104,numeric
+65,20,int 20 YearBuilt,Original construction date,.,age_residual,"WE first built age (YearBuilt - YrSold), but use age_residual instead that was based on age regressed on 4 vars",High importance,0.52,x,year,104,numeric
+1,1,int 1 ID,ID,!!! Don't use as predictor !!!,.,.,.,.,.,z - toss it,10000,toss
+2,2,int 2 MSSubClass,The building class,Dummies starting with 'class_',class_20,It is 1-STORY 1946 & NEWER - redundant with style_1Story; removing,,0.04,.,z - toss it,10000,toss
+3,2,int 2 MSSubClass,The building class,Dummies starting with 'class_',class_60,"20%, it's 2-STORY 1946 & NEWER - redundant with style_2Story; removing",.,0.38,.,z - toss it,10000,toss
+4,2,int 2 MSSubClass,The building class,Dummies starting with 'class_',class_50,"10%, it's 1-1/2 STORY FINISHED ALL AGES - totally redundant with style_1p5Fin; removing",.,-0.16,.,z - toss it,10000,toss
+8,2,int 2 MSSubClass,The building class,Dummies starting with 'class_',class_160,"4.3%, correlated with building type; removing",.,-0.11,.,z - toss it,10000,toss
+9,2,int 2 MSSubClass,The building class,Dummies starting with 'class_',class_80,"4%,, this class is split-level - redundant at .94 with style_SLvl; removing",.,-0.03,.,z - toss it,10000,toss
+10,2,int 2 MSSubClass,The building class,Dummies starting with 'class_',class_90,"3.6%, correlated with kitchens above ground and correlated at 1 with Duplex; removing",.,-0.11,.,z - toss it,10000,toss
+12,2,int 2 MSSubClass,The building class,Dummies starting with 'class_',class_85,"1.4%, this is split foyer - redundant with style_SFoyer; removing it",.,-0.05,.,z - toss it,10000,toss
+13,3,obj 3 MSZoning,The general zoning classification,Dummies starting with 'zone_',zone_FV,"4.5%, Correlated too highly with RL and RM - removing",.,0.09,.,z - toss it,10000,toss
+14,3,obj 3 MSZoning,The general zoning classification,Dummies starting with 'zone_',zone_RL,"79%, correlated too highly with RM - removing",.,0.25,.,z - toss it,10000,toss
+18,6,obj 6 Street,Type of road access,IGNORE - NO VARIANCE,.,.,.,.,.,z - toss it,10000,toss
+24,9,obj 9 LandContour,Flatness of the property,Dummies starting with 'slope_',slope_Lvl,"90%, is too redundant with the other 2 slope vars - remove",.,-0.03,,z - toss it,10000,toss
+25,10,obj 10 Utilities,Type of utilities available,IGNORE - NO VARIANCE,.,.,.,.,.,z - toss it,10000,toss
+28,11,obj 11 LotConfig,Lot configuration,Dummies starting with 'lotconfig_',lotconfig_Inside,"72%, too correlated with the other 2 - remove",.,-0.08,,z - toss it,10000,toss
+54,16,obj 16 BldgType,Type of dwelling,Dummies starting with 'bldgtype_',bldgtype_1Fam,"83.5%, too highly negatively related to the other building types - drop it, leave the other 3 dummies",.,0.14,.,z - toss it,10000,toss
+56,16,obj 16 BldgType,Type of dwelling,Dummies starting with 'bldgtype_',bldgtype_TwnhsE,"7.8%, correlates too much with class_120, remove",.,0,,z - toss it,10000,toss
+58,17,obj 17 HouseStyle,Style of dwelling,Dummies starting with 'style_',style_1Story,"50%; too highly negatively related to the other styles - drop it, leave the other 4 dummies",.,-0.06,.,z - toss it,10000,toss
+63,18,int 18 OverallQual,Overall material and finish quality,.,OverallQual,Use new numeric 'average_quality' instead,Clearly high importance,0.79,.,z - toss it,10000,toss
+67,22,obj 22 RoofStyle,Type of roof,Dummies starting with 'roof_',roof_gable,"78%, removing it - it correalates at -0.93 with roof_hip",.,-0.22,.,z - toss it,10000,toss
+69,23,obj 23 RoofMatl,Roof material,IGNORE - NO VARIANCE,.,.,.,.,.,z - toss it,10000,toss
+80,26,obj 26 MasVnrType,Masonry veneer type,Dummies starting with 'veneer_',veneer_brickface,"30.5% - too correlated with MasVnrArea, remove",.,0.2,,z - toss it,10000,toss
+83,28,obj 28 ExterQual,Exterior material quality,NUMERIC: exterior_quality,exterior_quality,Use new numeric 'average_quality' instead,Must be important,0.68,.,z - toss it,10000,toss
+87,30,obj 30 Foundation,Type of foundation,Dummies starting with 'found_',found_CBlock,"43%, removing - it's too highly correlated (negatively) with found_PConc",.,-0.34,.,z - toss it,10000,toss
+88,30,obj 30 Foundation,Type of foundation,Dummies starting with 'found_',found_PConc,"44%, removing it because it's too highly correlated with a bunch with really important vars, but in reality - it's mostly due to age",.,0.5,,z - toss it,10000,toss
+89,30,obj 30 Foundation,Type of foundation,Dummies starting with 'found_',found_Slab,1.6% - very low incidence; artificially high correlation with basement condition - removing,.,-0.12,.,z - toss it,10000,toss
+90,31,obj 31 BsmtQual,Height of the basement,NUMERIC: bsmt_height,bsmt_height,Ignore - use new numeric 'average_quality' instead,.,0.62,,z - toss it,10000,toss
+94,35,int 35 BsmtFinSF1,Type 1 finished square feet,"IGNORE: instead, use BsmtUnfSF (BsmtFinSF1 + BsmtFinSF2)",.,.,.,.,.,z - toss it,10000,toss
+96,37,int 37 BsmtFinSF2,Type 2 finished square feet,"IGNORE: instead, use BsmtUnfSF (BsmtFinSF1 + BsmtFinSF2)",.,.,.,.,.,z - toss it,10000,toss
+97,38,int 38 BsmtUnfSF,Unfinished square feet of basement area,IGNORE: use BsmtFinishedShare,BsmtUnfSF,.,.,.,.,z - toss it,10000,toss
+98,39,int 39 TotalBsmtSF,Total square feet of basement area,IGNORE: use BsmtFinishedShare,TotalBsmtSF,,.,.,.,z - toss it,10000,toss
+99,39.5,.,.,New variable - Share of Finished Basement area in total Bsmnt Area,BsmtFinishedShare,"No, correlated too much with bsmt_finished1, remove",,0.13,,z - toss it,10000,toss
+100,40,obj 40 Heating,Type of heating,IGNORE - NO VARIANCE,.,.,.,.,.,z - toss it,10000,toss
+101,41,obj 41 HeatingQC,Heating quality and condition,NUMERIC: heating_quality,heating_quality,Use new numeric 'average_quality' instead,.,0.43,.,z - toss it,10000,toss
+104,43,obj 43 Electrical,Electrical system,Dummies starting with 'elec_',elec_fuseA,"6.4%, removing as it correlates -0.85 with elec_sbrkr",.,-0.19,.,z - toss it,10000,toss
+105,44,int 44 1stFlrSF,First Floor square feet,.,1stFlrSF,IGNORE - use GrLivArea instead,.,.,.,z - toss it,10000,toss
+106,45,int 45 2ndFlrSF,Second floor square feet,.,2ndFlrSF,IGNORE - use GrLivArea instead,.,.,.,z - toss it,10000,toss
+109,47,in 47 GrLivArea,.,Newly built numeric: room_size,room_size,GrLivArea / TotRmsAbvGrd - still too highly correlated with Grater Living area - removing,.,.,,z - toss it,10000,toss
+112,50,int 50 FullBath,Full bathrooms above grade,IGNORE: use full_baths instead,,,.,.,.,z - toss it,10000,toss
+113,51,int 51 HalfBath,Half baths above grade,IGNORE: use half_baths instead,,,.,.,.,z - toss it,10000,toss
+114,52,int 52 BedroomAbvGr,Number of bedrooms above basement level,.,BedroomAbvGr,correlated with total rooms - .68; remove,.,0.17,,z - toss it,10000,toss
+115,53,int 53 KitchenAbvGr,Number of kitchens,.,KitchenAbvGr,"95% have 1 kitchen; negative corr with Sales, also - redundant with building type - Duplex; remove",.,-0.14,,z - toss it,10000,toss
+116,54,obj 54 KitchenQual,Kitchen quality,NUMERIC: kitchen_quality,kitchen_quality,Use new numeric 'average_quality' instead,Important,0.66,.,z - toss it,10000,toss
+117,55,int 55 TotRmsAbvGrd,Total rooms above grade (does not include bathrooms),.,TotRmsAbvGrd,correlated with BedroomAbvGr .68 - redundant; we decided to remove it,.,0.53,.,z - toss it,10000,toss
+119,57,int 57 Fireplaces,Number of fireplaces,.,Fireplaces,IGNORE: use fireplace_ttlscore instead,.,.,.,z - toss it,10000,toss
+120,58,obj 58 FireplaceQu,Fireplace quality,NUMERIC: fireplace_quality,fireplace_quality,IGNORE: use fireplace_ttlscore instead,.,.,.,z - toss it,10000,toss
+123,60,flo 60 GarageYrBlt,Year garage was built,IGNORE: high correlation with year built + some have no garages,.,.,.,.,.,z - toss it,10000,toss
+124,61,obj 61 GarageFinish,Interior finish of the garage,NUMERIC: gar_finish,gar_finish,Use new numeric 'garage_perception' instead,.,0.55,,z - toss it,10000,toss
+125,62,int 62 GarageCars,Size of garage in car capacity,.,GarageCars,Use new numeric 'garage_perception' instead,,0.64,,z - toss it,10000,toss
+126,63,int 63 GarageArea,Size of garage in square feet,Ignore: Correlated 0.88 with garage size in cars,.,,.,.,.,z - toss it,10000,toss
+128,65,obj 65 GarageCond,Garage condition,"IGNORE, use Numeric: gar_perception (product of gar_quality & gar_cond)",.,.,.,.,.,z - toss it,10000,toss
+135,72,int 72 PoolArea,Pool area in square feet,IGNORE - NO VARIANCE,.,.,.,.,.,z - toss it,10000,toss
+136,73,obj 73 PoolQC,Pool quality,IGNORE - NO VARIANCE,.,,.,.,.,z - toss it,10000,toss
+154,79,obj 79 SaleType,Type of sale,Dummies starting with 'sales_',sales_convent,"87%, highly redundant with sales_ dummies, remove",.,-0.24,.,z - toss it,10000,toss
+155,79,obj 79 SaleType,Type of sale,Dummies starting with 'sales_',sales_new,"8.4%, highly redundant with sales_ dummies, remove",.,0.36,.,z - toss it,10000,toss
+158,80,obj 80 SaleCondition,Condition of sale,Dummies starting with 'sale_',sale_Normal,82% - too highly correlated with sale_Partial - removing,.,-0.15,.,z - toss it,10000,toss
