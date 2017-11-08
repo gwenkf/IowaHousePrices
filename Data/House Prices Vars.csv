@@ -21,7 +21,7 @@ Unique Row ID,Orig Order,Original Variable,Original Var. Meaning,New Variables B
 17,5,int 5 LotArea,Lot size in square feet,.,LotArea,hist shows over 1400 values that are zero but when i try to count from dataframe there are no zero values?,Must be important,0.26,x,dimensions,20,numeric,
 82,27,flo 27 MasVnrArea,Masonry veneer area in square feet,.,MasVnrArea,59% of values are 0. no masonry veneer? correlation with saleprice .477 and correlation with exteriorquality .35,.,0.48,x,dimensions,21,numeric,
 107,46,int 46 LowQualFinSF,Low quality finished square feet (all floors),.,LowQualFinSF,98% of values are 0,.,-0.03,x,dimensions,22,numeric,
-108,47,int 47 GrLivArea,Above grade (ground) living area square feet,"Regressed it onto 'style_2Story','garage_perception', 'fireplace_ttlscore'",living_area_residual,Use residual!,.,0.71,x,dimensions,23,numeric,
+108,47,int 47 GrLivArea,Above grade (ground) living area square feet,"Regressed it onto 'style_2Story','garage_perception', 'fireplace_ttlscore'",living_area_residual,Use residual!,.,0.71,x,dimensions,23,numeric,yes
 130,67,int 67 WoodDeckSF,Wood deck area in square feet,KEEP: low correlations with 4 porch-related vars below,WoodDeckSF,.,.,0.32,x,dimensions,24,numeric,
 131,68,int 68 OpenPorchSF,Open porch area in square feet,.,OpenPorchSF,about 45% (656) of these values are 0. correlation with saleprice .32,.,0.32,x,dimensions,25,numeric,
 132,69,int 69 EnclosedPorch,Enclosed porch area in square feet,.,EnclosedPorch,Negatively correlated (-0.38) with year built; Consider taking it out? Maybe not,.,-0.13,x,dimensions,26,numeric,
@@ -62,7 +62,7 @@ Unique Row ID,Orig Order,Original Variable,Original Var. Meaning,New Variables B
 39,13,obj 13 Neighborhood,Physical locations w/i Ames city,Dummies starting with 'nbh_',nbh_NWAmes,5.00%,.,0.02,x,neighborhood,61,dummy,
 40,13,obj 13 Neighborhood,Physical locations w/i Ames city,Dummies starting with 'nbh_',nbh_NoRidge,2.80%,.,0.33,x,neighborhood,62,dummy,
 41,13,obj 13 Neighborhood,Physical locations w/i Ames city,Dummies starting with 'nbh_',nbh_NridgHt,5.30%,.,0.4,x,neighborhood,63,dummy,
-42,13,obj 13 Neighborhood,Physical locations w/i Ames city,Dummies starting with 'nbh_',oldtown_residual,"7.7%, regressed nbh_OldTown onto 'zone_RM','alley_gravel' - use residual now",.,-0.19,x,neighborhood,64,dummy,
+42,13,obj 13 Neighborhood,Physical locations w/i Ames city,Dummies starting with 'nbh_',oldtown_residual,"7.7%, regressed nbh_OldTown onto 'zone_RM','alley_gravel' - use residual now",.,-0.19,x,neighborhood,64,dummy,yes
 43,13,obj 13 Neighborhood,Physical locations w/i Ames city,Dummies starting with 'nbh_',nbh_SWISU,1.70%,.,-0.06,x,neighborhood,65,dummy,
 44,13,obj 13 Neighborhood,Physical locations w/i Ames city,Dummies starting with 'nbh_',nbh_Sawyer,5.10%,.,-0.13,x,neighborhood,66,dummy,
 45,13,obj 13 Neighborhood,Physical locations w/i Ames city,Dummies starting with 'nbh_',nbh_SawyerW,4.00%,.,0.01,x,neighborhood,67,dummy,
