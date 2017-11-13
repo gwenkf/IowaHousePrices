@@ -4,8 +4,6 @@ The following repository contains code for predicting house prices in Ames, Iowa
 python codes:
 boxcoxplot.py - boxcox transformation and visualization function for feature engineering
 outliers.py - function that detects outliers used in feature engineering
-x correlations for ALL quant vars.xlsx - correlation of all variables in feature engineering 1
-x quant dummies correlations.csv - correlation of dummy variables in feature engineering 1
 
 The following is a description of each folder in the repository:
 
